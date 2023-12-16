@@ -1,11 +1,18 @@
 'use client'
 
 import React from 'react'
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ThemeProvider } from "next-themes";
 
-type Props = {}
+type Props = {
+    children: React.ReactNode;
+}
 
-export default function LayoutContainer({}: Props) {
+const queryClient = new QueryClient();
+export default function LayoutContainer({children}: Props) {
   return (
-    <div>LayoutContainer</div>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class">{children}</ThemeProvider>
+    </QueryClientProvider>
   )
 }
